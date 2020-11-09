@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="favicon.ico">
+    <title>Formulario</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
+    <div id="app" class="container">
+        <h1>Encuesta de FrameWorks</h1>
+        <h4>¿Te gusta programar?</h4>
+
+        <div class="radio">
+            <label class="radio-inline">
+                <input type="radio" v-model="vue.exp" v-bind:value="true"> Sí
+            </label>
+            <label class="radio-inline">
+                <input type="radio" v-model="vue.exp" v-bind:value="false"> No
+            </label>
+        </div>
+
+        <template v-if="vue.exp">
+
+            <div class="form-group">
+                <label for="vue_years">¿Cúanto llevas programando?</label>
+                <input type="number" v-model="vue.years" class="form-control">
+            </div>
+
+            <div v-if="vue.years > -1 && vue.years < 3" class="form-group">
+                <label for="vue_years">¿Qué te motiva a programar?</label>
+                <textarea v-model="vue.motiva" class="form-control" rows="4"></textarea>
+            </div>
+
+            <div v-if="vue.years > 2" class="form-group">
+                <label for="vue_years">Cuentanos tu experiencia programando</label>
+                <textarea v-model="vue.description" class="form-control" rows="4"></textarea>
+            </div>
+
+<!-------------------------------------------------------------------------------------->
+
+            <label for="vue_years">Cuantos lenguajes de programacion conoces? Captura uno a uno</label>
+            <input  type="text" v-model="frutaNueva" @keyup.enter="agregarFruta">
+        <button @click="agregarFruta"> Agregar</button>
+
+            <ul>
+                <li v-for="fruta of frutas">
+                   
+                         {{fruta.nombre}}  
+                      <span v-if=" fruta.cantidad === 0"> </span>
+                    
+                </li>
+            </ul> 
+       
+        </template>
+        <footer class="footer">
+            <h2>Gracias por apoyarnos</h2>
+            <h4>Le gusta programar: {{vue.exp}}</h4>
+            <h4>Cuántos años lleva programando?: {{vue.years}}</h4>
+            <h4>Su experiencia programando: {{vue.description}}</h4>
+            <h4>Que lo motiva a programar: {{vue.motiva}}</h4>
+            <h4>Lenguajes de programacion que conoce: {{frutas}}</h4>
+
+        </footer>
+    </div>
+    <script src="https://unpkg.com/vue@2.1.8/dist/vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                frutas: [
+                ],
+                frutaNueva:' ',
+                vue: {
+                    exp: null,
+                    years: 0,
+                    description: '',
+                    motiva:''
+                }
+            },
+                methods: {
+            agregarFruta(){
+                 console.log(this.frutaNueva);
+                    this.frutas.push({
+                nombre: this.frutaNueva
+            })
+            this.frutaNueva = "";   
+         }
+      },
+});
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
+</body>
+</html>
